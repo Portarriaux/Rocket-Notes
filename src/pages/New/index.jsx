@@ -1,21 +1,26 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { Textarea } from '../../components/Textarea';
-import { NoteItem } from '../../components/NoteItem';
-import { Section } from '../../components/Section';
-import { Button } from '../../components/Button';
-import { Header } from '../../components/Header';
-import { Input } from '../../components/Input';
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Textarea } from "../../components/Textarea";
+import { NoteItem } from "../../components/NoteItem";
+import { Section } from "../../components/Section";
+import { Button } from "../../components/Button";
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
 
-import { Container, Form } from './styles';
+import { Container, Form } from "./styles";
 
 export function New() {
   const [links, setLinks] = useState([]);
-  const [newLink, setNewLink] = useState('');
+  const [newLink, setNewLink] = useState("");
 
   function handleAddlink() {
     setLinks((prevState) => [...prevState, newLink]);
-    setNewLink('');
+    setNewLink("");
+  }
+
+  function handleRemoveLink (deleted) {
+    setLinks((prevState) => prevState.filter( link => link !== deleted))
+
   }
 
   return (
@@ -33,11 +38,7 @@ export function New() {
 
           <Section title="Links úteis">
             {links.map((link, index) => (
-              <NoteItem
-                key={String(index)}
-                value={link}
-                onClick={() => {}}
-              />
+              <NoteItem key={String(index)} value={link} onClick={() => handleRemoveLink(link)} />
             ))}
             <NoteItem
               isNew

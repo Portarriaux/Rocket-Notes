@@ -39,7 +39,9 @@ export function Profile() {
       old_password: passwordOld,
     };
 
-    await updateProfile({ user, avatarFile });
+    const userUpdate = Object.assign(user,update)
+
+    await updateProfile({ user: userUpdate, avatarFile });
   }
 
   function handleChangeAvatar(event) {
